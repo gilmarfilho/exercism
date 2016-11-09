@@ -1,3 +1,7 @@
+module BookKeeping
+  VERSION = 2
+end
+
 class Fixnum
   ROMAN_NUMBERS = {
     1000 => "M",  
@@ -15,13 +19,15 @@ class Fixnum
         1 => "I",  
   }
 
-  def roman
-    n = self
-    roman = ""
-    ROMAN_NUMBERS.each do |value, letter|
-      roman << letter*(n / value)
-      n = n % value
+  def to_roman
+    number = self
+    result = ""
+    ROMAN_NUMBERS.each do |arabic_number, roman_number|
+      result << roman_number*(number / arabic_number)
+      number = number % arabic_number
     end
-    return roman
+    return result
   end
 end
+
+p 3651.to_roman
