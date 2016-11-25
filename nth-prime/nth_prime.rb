@@ -1,46 +1,43 @@
-require 'pry'
-
 module BookKeeping
   VERSION = 1
 end
 
+# This class returns the prime number according to the order chosen by the user
 class Prime
   def self.nth(position)
-    self.validate(position)
-    self.populate(position)[position - 1]
+    validate position
+    get_prime position
   end
-  
-  private
-  
+
   def self.validate(number)
-    if(number < 1)
-      fail(ArgumentError, "Please, insert a number greater then 0")
-    end
+    raise(ArgumentError, 'Please, insert a number greater then 0') if number < 1
   end
-  
-  def self.populate(amount)
-    primes = []
-    primes << 2
-    number = 3
-    
-    while primes.size < amount
-      if is_prime?(number)
-        primes << number
+
+  def self.get_prime(position)
+    # Considering that the number 2 is the only prime pair, here I make a chec
+    # if the user wants to get the first number, if so the number 2 is already
+    # returned, otherwise a loop is made where the desired number is searched
+    # Considering only the odds
+
+    if position > 1
+      primes_counter = 1
+      number = 3
+      while primes_counter < position
+        primes_counter += 1 if prime? number
+        number += 2
       end
-      number+= 2
+      number -= 2
     end
-    primes
+    number || 2
   end
-  
-  def self.is_prime?(number)
-    square = Math.sqrt(number).to_i
-    is_prime = true
-    for divider in 2..square
-      if(number % divider == 0)
-        is_prime = false
-        break
-      end
+
+  def self.prime?(number)
+    square = Math.sqrt(number)
+    dividers = 2..square
+
+    dividers.each do |divider|
+      return false if (number % divider).zero?
     end
-    is_prime
+    true
   end
 end
