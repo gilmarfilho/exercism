@@ -1,4 +1,4 @@
-module BookKeeping
+module Chess
   TOTAL_SQUARE = 64
 end
 
@@ -10,12 +10,6 @@ class Grains
   end
 
   def self.total
-    squares = 1..BookKeeping::TOTAL_SQUARE
-    total_amount = 0
-
-    squares.each do |square|
-      total_amount += 2**(square - 1)
-    end
-    total_amount
+    2 * square(Chess::TOTAL_SQUARE) - 1
   end
 end
