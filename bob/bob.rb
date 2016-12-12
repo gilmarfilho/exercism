@@ -8,27 +8,15 @@ class Bob
   end
 
   def self.empty?(text)
-    if text.nil? || text.lstrip == ''
-      true
-    else
-      false
-    end
+    text.nil? || text.lstrip == ''
   end
 
   def self.question?(text)
-    if  last_char(text) == '?'
-      true
-    else
-      false
-    end
+    last_char(text) == '?'
   end
 
   def self.yell?(text)
-    if upcase?(text) && !letters(text).length.zero?
-      true
-    else
-      false
-    end
+    upcase?(text) && !letters(text).length.zero?
   end
 
   def self.upcase?(text)
