@@ -14,7 +14,7 @@ class School
   end
 
   def sort
-    @students.values.flatten.sort
+    @students.values.flatten
   end
 
   def students(grade)
@@ -24,12 +24,11 @@ class School
   def students_by_grade
     all_students = []
     @students.each do |grade, students|
-      next if students.empty?
       students_by_grade = {}
       students_by_grade[:grade] = grade
       students_by_grade[:students] = students
       all_students << students_by_grade
     end
-    all_students.sort_by! { |hsh| hsh[:grade] }
+    all_students.sort_by { |hsh| hsh[:grade] }
   end
 end
