@@ -4,7 +4,9 @@ end
 
 # School
 class School
-  @students = Hash.new { |hsh, key| hsh[key] = [] }
+  def initialize
+    @students = Hash.new { |hsh, key| hsh[key] = [] }
+  end
 
   def add(name, grade)
     @students[grade] << name
@@ -28,7 +30,6 @@ class School
       students_by_grade[:students] = students
       all_students << students_by_grade
     end
-    Hash[all_students.sort_by { |k, _v| k }]
-    all_students
+    all_students.sort_by! { |hsh| hsh[:grade] }
   end
 end
